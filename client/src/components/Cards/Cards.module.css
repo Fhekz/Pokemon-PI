@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
+
+.cards {
+  /* margin-top: 130px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 10px; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.loading h1 {
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 40px;
+  color: #f1f1f1;
+}
+.loading img {
+  width: 300px;
+  height: 400px;
+}

@@ -1,0 +1,38 @@
+.header {
+  background: linear-gradient(120deg, #4896eb 30%, #f1f1f1 60%);
+  background-repeat: no-repeat;
+  font-family: "Roboto", sans-serif;
+  height: auto;
+  width: 100%;
+  /* position: fixed; */
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  box-sizing: border-box;
+  height: 119px;
+}
+
+.header img {
+  margin-top: 19px;
+  margin-bottom: 20px;
+  margin-left: 13px;
+}
+
+.header button {
+  padding: 18px 18px;
+  border: none;
+  font-size: 16px;
+  border-radius: 50px;
+  background: linear-gradient(to right, #4896eb, #004b91);
+  color: white;
+  cursor: pointer;
+  box-shadow: 1px 1px 30px -12px #004b91;
+  transition: all 300ms;
+}
+
+.header button:hover {
+  box-shadow: 1px 1px 30px -6px #004b91;
+}
