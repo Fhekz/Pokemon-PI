@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
+
+.searchbar input {
+  margin-right: 45px;
+  width: 300px;
+  height: 30px;
+  border-radius: 15px;
+  font-family: "Roboto", sans-serif;
+  outline: none;
+  border: 0;
+}

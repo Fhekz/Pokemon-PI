@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "../SearchBar/SearchBar";
 import styles from "./NavBar.module.css";
 
 export default function NavBar() {
@@ -12,7 +12,9 @@ export default function NavBar() {
             <img src="logo-pokemon.png" alt="logo_pokemon.png" width="200px" />
           </Link>
         </div>
-        <div>{/* <SearchBar /> */}</div>
+        <div>
+          <SearchBar />
+        </div>
         <div>
           <Link to="/create">
             <button>Create a Pokémon</button>

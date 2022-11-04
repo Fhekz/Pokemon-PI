@@ -15,6 +15,7 @@ export default function Card({ name, image, types }) {
     fire: "fire",
     water: "water",
     grass: "grass",
+    electric: "electric",
     psychic: "psychic",
     ice: "ice",
     dragon: "dragon",
@@ -34,8 +35,8 @@ export default function Card({ name, image, types }) {
               <img
                 src={`${t}.png`}
                 alt={`type_${t}.png`}
-                width="50px"
-                height="20px"
+                width="60px"
+                height="25px"
                 key={i}
               />
             );
