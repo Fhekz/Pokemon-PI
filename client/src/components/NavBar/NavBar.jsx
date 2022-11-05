@@ -16,7 +16,7 @@ export default function NavBar() {
           <SearchBar />
         </div>
         <div>
-          <Link to="/create">
+          <Link to="/createpokemon">
             <button>Create a Pokémon</button>
           </Link>
         </div>

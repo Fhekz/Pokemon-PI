@@ -68,3 +68,13 @@ export function clearPokemonById() {
     type: "CLEAR_POKEMON_BY_ID",
   };
 }
+
+export function createPokemon(payload) {
+  return async function () {
+    const response = await axios.post(
+      "http://localhost:3001/pokemons",
+      payload
+    );
+    return response;
+  };
+}

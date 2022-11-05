@@ -1,7 +1,6 @@
 const initialState = {
   allPokemons: [],
   filteredPokemons: [],
-  pokemonsTypes: [],
   pokemonById: [],
 };
 
@@ -97,6 +96,10 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pokemonById: [],
+      };
+    case "CREATE_POKEMON":
+      return {
+        ...state,
       };
     default:
       return state;
