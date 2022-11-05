@@ -9,7 +9,11 @@ export default function NavBar() {
       <header className={styles.header}>
         <div>
           <Link to="/">
-            <img src="logo-pokemon.png" alt="logo_pokemon.png" width="200px" />
+            <img
+              src="../logo-pokemon.png"
+              alt="logo_pokemon.png"
+              width="200px"
+            />
           </Link>
         </div>
         <div>

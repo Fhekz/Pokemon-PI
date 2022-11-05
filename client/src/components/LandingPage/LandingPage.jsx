@@ -7,13 +7,13 @@ export default function LandingPage() {
     <div className={styles.landing}>
       <header className={styles.header}>
         <div>
-          <img src="logo-pokemon.png" alt="logo_pokemon.png" width="200px" />
+          <img src="../logo-pokemon.png" alt="logo_pokemon.png" width="200px" />
         </div>
         <div className={styles.logos}>
           <div>
             <a href="https://www.linkedin.com/in/fmaldeco/">
               <img
-                src="logo-linkedin.png"
+                src="../logo-linkedin.png"
                 alt="logo_linkedin.png"
                 width="40px"
               />
@@ -21,7 +21,11 @@ export default function LandingPage() {
           </div>
           <div>
             <a href="https://github.com/Fhekz">
-              <img src="logo-github.png" alt="logo_github.png" width="40px" />
+              <img
+                src="../logo-github.png"
+                alt="logo_github.png"
+                width="40px"
+              />
             </a>
           </div>
         </div>
@@ -38,7 +42,11 @@ export default function LandingPage() {
           </Link>
         </div>
         <div>
-          <img src="pikachu.png" className={styles.pikachu} alt="pikachu.png" />
+          <img
+            src="../pikachu.png"
+            className={styles.pikachu}
+            alt="pikachu.png"
+          />
         </div>
       </main>
     </div>

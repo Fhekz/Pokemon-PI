@@ -1,11 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
 
-.searchbar input {
+.searchbar {
   margin-right: 45px;
-  width: 300px;
-  height: 30px;
-  border-radius: 15px;
+  width: 350px;
+  height: 40px;
+  border-radius: 20px;
+  background: rgba(241, 241, 241, 0.8);
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(4px) saturate(180%);
+}
+.searchbar input {
+  background: transparent;
   font-family: "Roboto", sans-serif;
+  flex: 1;
   outline: none;
   border: 0;
+  color: #706e72;
+}
+
+::placeholder {
+  color: #706e72;
 }

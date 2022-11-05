@@ -59,7 +59,7 @@ export default function FilterBar() {
             value={selectOrder}
             className="a-z"
           >
-            <option value="filter">A-Z:</option>
+            <option hidden>A-Z</option>
             <option value="ascending">Ascending</option>
             <option value="descending">Descending</option>
           </select>
@@ -69,7 +69,7 @@ export default function FilterBar() {
             value={selectAttack}
             className="attack"
           >
-            <option value="strenght">Strenght</option>
+            <option hidden>Strenght</option>
             <option value="greater strenght">Greater strenght</option>
             <option value="lower strenght">Lower strenght</option>
           </select>
@@ -77,7 +77,7 @@ export default function FilterBar() {
         <div>
           <p>Filter by</p>
           <select onChange={handleFilterByType} value={selectType}>
-            <option value="type">Tipo</option>
+            <option hidden>Type</option>
             <option value="normal">Normal</option>
             <option value="fighting">Fighting</option>
             <option value="flying">Flying</option>
@@ -98,14 +98,20 @@ export default function FilterBar() {
             <option value="fairy">Fairy</option>
           </select>
           <select onChange={handleFilterCreated} value={selectCreator}>
-            <option value="all">All</option>
+            <option hidden>All</option>
             <option value="created">Created</option>
             <option value="existing">Existing</option>
           </select>
         </div>
-        <div>
-          <button onClick={clearAllFilters}>Clear filters</button>
-          <button onClick={() => setShowFilterBar(false)}>Hide filters</button>
+        <div className={styles.hidden}>
+          <div>
+            <button onClick={clearAllFilters}>Clear filters</button>
+          </div>
+          <div>
+            <button onClick={() => setShowFilterBar(false)}>
+              Hide filters
+            </button>
+          </div>
         </div>
       </div>
     );

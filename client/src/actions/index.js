@@ -78,3 +78,13 @@ export function createPokemon(payload) {
     return response;
   };
 }
+
+export function getPokemonType() {
+  return async function (dispatch) {
+    let json = await axios.get("http://localhost:3001/types");
+    return dispatch({
+      type: "GET_POKEMON_TYPE",
+      payload: json.data,
+    });
+  };
+}

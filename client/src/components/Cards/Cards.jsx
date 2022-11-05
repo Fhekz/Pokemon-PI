@@ -67,7 +67,7 @@ export default function Cards() {
   } else {
     return (
       <div className={styles.loading}>
-        <img src="pokeball.gif" alt="loading" />
+        <img src="../pokeball.gif" alt="loading" />
         <h1>Loading... please wait</h1>
       </div>
     );

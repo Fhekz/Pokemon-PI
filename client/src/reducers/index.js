@@ -2,6 +2,7 @@ const initialState = {
   allPokemons: [],
   filteredPokemons: [],
   pokemonById: [],
+  pokemonsTypes: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -100,6 +101,11 @@ const rootReducer = (state = initialState, action) => {
     case "CREATE_POKEMON":
       return {
         ...state,
+      };
+    case "GET_POKEMON_TYPE":
+      return {
+        ...state,
+        pokemonsTypes: action.payload,
       };
     default:
       return state;

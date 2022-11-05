@@ -53,6 +53,13 @@
   justify-content: space-around;
 }
 
+.loading {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .loading h1 {
   width: 100%;
   font-family: "Roboto", sans-serif;

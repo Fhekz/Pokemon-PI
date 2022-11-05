@@ -1,273 +1,306 @@
-import React, { useEffect, useState } from "react";
-import Model from "../Model/Model.jsx";
+import React from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createPokemon, clearState } from "../../actions";
+import { useHistory } from "react-router-dom";
+import { getPokemonType, createPokemon, clearState } from "../../actions";
+import { Link } from "react-router-dom";
+import NavBar from "../NavBar/NavBar.jsx";
 
 export default function CreatePokemon() {
   const dispatch = useDispatch();
-  const isCreated = useSelector((state) => state.createPokemon);
-
-  // Controlled form
-  const [input, setInput] = useState({
-    name: "",
-    image: "",
-    type1: "",
-    type2: "",
-    height: "",
-    weight: "",
-    hp: "",
-    attack: "",
-    defense: "",
-    speed: "",
-  });
+  const history = useHistory();
+  const types = useSelector((state) => state.pokemonsTypes);
 
   const [errors, setErrors] = useState({ name: "" });
 
-  const handleInputChange = (e) => {
-    setInput({
-      ...input,
+  const [pokemon, setPokemon] = useState({
+    name: "",
+    types: [],
+    image: "",
+    hp: 0,
+    attack: 0,
+    defense: 0,
+    speed: 0,
+    height: 0,
+    weight: 0,
+  });
+
+  useEffect(() => {
+    dispatch(getPokemonType());
+  }, []);
+
+  function onInputChange(e) {
+    e.preventDefault();
+    setPokemon({
+      ...pokemon,
       [e.target.name]: e.target.value,
     });
     setErrors(
       validateForm({
-        ...input,
+        ...pokemon,
         [e.target.name]: e.target.value,
       })
     );
-  };
+  }
 
-  const handleSubmit = (e) => {
-    if (!input.name) return alert("You must complete the form");
+  function onSubmit(e) {
     e.preventDefault();
-    dispatch(createPokemon(input));
-    setInput({
+    console.log(pokemon);
+    dispatch(createPokemon(pokemon));
+    alert("Personaje creado con exito");
+    setPokemon({
       name: "",
+      types: [],
       image: "",
-      type1: "",
-      type2: "",
-      height: "",
-      weight: "",
-      hp: "",
-      attack: "",
-      defense: "",
-      speed: "",
+      hp: 0,
+      attack: 0,
+      defense: 0,
+      speed: 0,
+      height: 0,
+      weight: 0,
     });
-  };
-
-  // Modal on Submit button
+    history.push("/home");
+  }
 
   const finishedForm = () => {
     setTimeout(() => dispatch(clearState()), 2000);
   };
 
   return (
-    <div>
+    <form className="form" onSubmit={onSubmit}>
       <div>
+        <NavBar />
         <div>
           <div>
-            {input.image ? (
-              <img src={input.image} alt={input.name}></img>
-            ) : (
-              <img src="" alt="New Pokemon"></img>
-            )}
-            {input.name && <p>{input.name}</p>}
+            <div>
+              {pokemon.image ? (
+                <img src={pokemon.image} alt={pokemon.name}></img>
+              ) : (
+                <img src="../newPokemonImg.png" alt="New Pokemon"></img>
+              )}
+              {pokemon.name && <p>{pokemon.name}</p>}
+            </div>
+            <form onSubmit={onSubmit}>
+              <h1>Create a new pokemon</h1>
+              <div></div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  name="name"
+                  onChange={onInputChange}
+                  value={pokemon.name}
+                  className={errors.name}
+                ></input>
+                {errors.name && <p>{errors.name}</p>}
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Image"
+                  name="image"
+                  onChange={onInputChange}
+                  value={pokemon.image}
+                ></input>
+                {errors.image && <p>{errors.image}</p>}
+              </div>
+              <div>
+                <select
+                  name="type1"
+                  onChange={onInputChange}
+                  value={pokemon.type1}
+                >
+                  <option value="Type 1">Type 1</option>
+                  {types &&
+                    types
+                      .sort((a, b) => {
+                        if (a.name < b.name) return -1;
+                        if (a.name > b.name) return 1;
+                        return 0;
+                      })
+                      .map((type) => {
+                        return (
+                          <option value={type.name} key={type.id}>
+                            {type.name}
+                          </option>
+                        );
+                      })}
+                </select>
+                <select
+                  name="type2"
+                  onChange={onInputChange}
+                  value={pokemon.type2}
+                >
+                  <option value="Type 2">Type 2</option>
+                  {types &&
+                    types
+                      .sort((a, b) => {
+                        if (a.name < b.name) return -1;
+                        if (a.name > b.name) return 1;
+                        return 0;
+                      })
+                      .map((type) => {
+                        return (
+                          <option value={type.name} key={type.id}>
+                            {type.name}
+                          </option>
+                        );
+                      })}
+                </select>
+                {errors.type1 && <p>{errors.type1}</p>}
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Height"
+                  name="height"
+                  onChange={onInputChange}
+                  value={pokemon.height}
+                  className={errors.height}
+                ></input>
+                {errors.height && <p>{errors.height}</p>}
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Weight"
+                  name="weight"
+                  onChange={onInputChange}
+                  value={pokemon.weight}
+                  className={errors.weight}
+                ></input>
+                {errors.weight && <p>{errors.weight}</p>}
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Health"
+                  name="hp"
+                  onChange={onInputChange}
+                  value={pokemon.hp}
+                  className={errors.hp}
+                ></input>
+                {errors.hp && <p>{errors.hp}</p>}
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Attack"
+                  name="attack"
+                  onChange={onInputChange}
+                  value={pokemon.attack}
+                  className={errors.attack}
+                ></input>
+                {errors.attack && <p>{errors.attack}</p>}
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Defense"
+                  name="defense"
+                  onChange={onInputChange}
+                  value={pokemon.defense}
+                  className={errors.defense}
+                ></input>
+                {errors.defense && <p>{errors.defense}</p>}
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Speed"
+                  name="speed"
+                  onChange={onInputChange}
+                  value={pokemon.speed}
+                  className={errors.speed}
+                ></input>
+                {errors.speed && <p>{errors.speed}</p>}
+              </div>
+            </form>
           </div>
-          <form onSubmit={handleSubmit}>
-            <h1>Create a new pokemon</h1>
-            <div></div>
-            <div>
-              <input
-                type="text"
-                placeholder="Name"
-                name="name"
-                onChange={handleInputChange}
-                value={input.name}
-              ></input>
-              {errors.name && <p>{errors.name}</p>}
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Image"
-                name="image"
-                onChange={handleInputChange}
-                value={input.image}
-              ></input>
-              {errors.image && <p>{errors.image}</p>}
-            </div>
-            <div>
-              {/* <select
-                name="type1"
-                onChange={handleInputChange}
-                value={input.type1}
-              >
-                <option value="Type 1">Type 1</option>
-                {types &&
-                  types
-                    .sort((a, b) => {
-                      if (a.name < b.name) return -1;
-                      if (a.name > b.name) return 1;
-                      return 0;
-                    })
-                    .map((type) => {
-                      return (
-                        <option value={type.id} key={type.id}>
-                          {type.name}
-                        </option>
-                      );
-                    })}
-              </select> */}
-              {/* <select
-                name="type2"
-                onChange={handleInputChange}
-                value={input.type2}
-              >
-                <option value="Type 2">Type 2</option>
-                {types &&
-                  types
-                    .sort((a, b) => {
-                      if (a.name < b.name) return -1;
-                      if (a.name > b.name) return 1;
-                      return 0;
-                    })
-                    .map((type) => {
-                      return (
-                        <option value={type.id} key={type.id}>
-                          {type.name}
-                        </option>
-                      );
-                    })}
-              </select> */}
-              {errors.type1 && <p>{errors.type1}</p>}
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Height"
-                name="height"
-                onChange={handleInputChange}
-                value={input.height}
-              ></input>
-              {errors.height && <p>{errors.height}</p>}
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Weight"
-                name="weight"
-                onChange={handleInputChange}
-                value={input.weight}
-              ></input>
-              {errors.weight && <p>{errors.weight}</p>}
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Health"
-                name="hp"
-                onChange={handleInputChange}
-                value={input.hp}
-              ></input>
-              {errors.hp && <p>{errors.hp}</p>}
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Attack"
-                name="attack"
-                onChange={handleInputChange}
-                value={input.attack}
-              ></input>
-              {errors.attack && <p>{errors.attack}</p>}
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Defense"
-                name="defense"
-                onChange={handleInputChange}
-                value={input.defense}
-              ></input>
-              {errors.defense && <p>{errors.defense}</p>}
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Speed"
-                name="speed"
-                onChange={handleInputChange}
-                value={input.speed}
-              ></input>
-              {errors.speed && <p>{errors.speed}</p>}
-            </div>
-            {Object.keys(errors).length !== 0 ? (
-              <button disabled="true" onClick={finishedForm}>
-                <p>Complete the form</p>
-              </button>
-            ) : (
-              <button onClick={finishedForm}>Create</button>
-            )}
-            {isCreated && <Model />}
-          </form>
         </div>
       </div>
-    </div>
+      {Object.keys(errors).length !== 0 ? (
+        <div>
+          <Link to="/home">
+            <button type="submit" className="atras">
+              Atrás
+            </button>
+          </Link>
+          <button disabled="true" onClick={finishedForm}>
+            <p>Complete the form</p>
+          </button>
+        </div>
+      ) : (
+        <div>
+          <Link to="/home">
+            <button type="submit" className="atras">
+              Atrás
+            </button>
+          </Link>
+          <button type="submit" onClick={finishedForm}>
+            Create
+          </button>
+        </div>
+      )}
+    </form>
   );
 }
 
-export function validateForm(input) {
+export function validateForm(pokemon) {
   let errors = {};
-  if (!input.name) {
+  if (!pokemon.name) {
     errors.name = "Name is required";
-  } else if (!/^[A-Za-z]+$/.test(input.name)) {
+  } else if (!/^[A-Za-z]+$/.test(pokemon.name)) {
     errors.name = "Name must be plain text";
   }
-  if (!input.image) {
+  if (!pokemon.image) {
     errors.image = "Image is required";
   } else if (
     !/(https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.svg)(\?[^\s[",><]*)?/.test(
-      input.image
+      pokemon.image
     )
   ) {
     errors.image = "An URL of an image is required";
   }
-  if (!input.type1 || input.type1 === "type1") {
+  if (!pokemon.type1 || pokemon.type1 === "type1") {
     errors.type1 = "Type can not be empty";
   }
-  if (!input.height) {
+  if (!pokemon.height) {
     errors.height = "Height is required";
-  } else if (!/^([1-9]\d{0,2}|1000)$/.test(input.height)) {
+  } else if (!/^([1-9]\d{0,2}|1000)$/.test(pokemon.height)) {
     errors.height = "Height must be between 1 and 1000";
   }
-  if (!input.weight) {
+  if (!pokemon.weight) {
     errors.weight = "Weight is required";
-  } else if (!/^([1-9]\d{0,2}|1000)$/.test(input.weight)) {
+  } else if (!/^([1-9]\d{0,2}|1000)$/.test(pokemon.weight)) {
     errors.weight = "Weight must be between 1 and 1000";
   }
 
-  if (!input.hp) {
+  if (!pokemon.hp) {
     errors.hp = "Hp is required";
-  } else if (!/^([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])$/.test(input.hp)) {
+  } else if (
+    !/^([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])$/.test(pokemon.hp)
+  ) {
     errors.hp = "Hp must be between 1 and 255";
   }
-  if (!input.attack) {
+  if (!pokemon.attack) {
     errors.attack = "Attack is required";
   } else if (
-    !/^([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])$/.test(input.attack)
+    !/^([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])$/.test(pokemon.attack)
   ) {
     errors.attack = "Attack must be between 1 and 255";
   }
-  if (!input.defense) {
+  if (!pokemon.defense) {
     errors.defense = "Defense is required";
   } else if (
-    !/^([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])$/.test(input.defense)
+    !/^([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])$/.test(pokemon.defense)
   ) {
     errors.defense = "Defense must be between 1 and 255";
   }
-  if (!input.speed) {
+  if (!pokemon.speed) {
     errors.speed = "Speed is required";
   } else if (
-    !/^([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])$/.test(input.speed)
+    !/^([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])$/.test(pokemon.speed)
   ) {
     errors.speed = "Speed must be between 1 and 255";
   }

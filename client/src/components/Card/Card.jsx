@@ -33,7 +33,7 @@ export default function Card({ name, image, types }) {
           if (t === allTypes[t]) {
             return (
               <img
-                src={`${t}.png`}
+                src={`../${t}.png`}
                 alt={`type_${t}.png`}
                 width="60px"
                 height="25px"
