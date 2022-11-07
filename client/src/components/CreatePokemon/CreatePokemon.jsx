@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getPokemonType, createPokemon, clearState } from "../../actions";
 import { Link } from "react-router-dom";
-import NavBar from "../NavBar/NavBar.jsx";
+import styles from "./CreatePokemon.module.css";
 
 export default function CreatePokemon() {
   const dispatch = useDispatch();
@@ -17,12 +17,12 @@ export default function CreatePokemon() {
     name: "",
     types: [],
     image: "",
-    hp: 0,
-    attack: 0,
-    defense: 0,
-    speed: 0,
-    height: 0,
-    weight: 0,
+    hp: "",
+    attack: "",
+    defense: "",
+    speed: "",
+    height: "",
+    weight: "",
   });
 
   useEffect(() => {
@@ -52,12 +52,12 @@ export default function CreatePokemon() {
       name: "",
       types: [],
       image: "",
-      hp: 0,
-      attack: 0,
-      defense: 0,
-      speed: 0,
-      height: 0,
-      weight: 0,
+      hp: "",
+      attack: "",
+      defense: "",
+      speed: "",
+      height: "",
+      weight: "",
     });
     history.push("/home");
   }
@@ -67,182 +67,250 @@ export default function CreatePokemon() {
   };
 
   return (
-    <form className="form" onSubmit={onSubmit}>
+    <div className={styles.container}>
       <div>
-        <NavBar />
-        <div>
-          <div>
+        <form className={styles.form_main} onSubmit={onSubmit}>
+          <div className={styles.title}>
             <div>
-              {pokemon.image ? (
-                <img src={pokemon.image} alt={pokemon.name}></img>
-              ) : (
-                <img src="../newPokemonImg.png" alt="New Pokemon"></img>
-              )}
-              {pokemon.name && <p>{pokemon.name}</p>}
-            </div>
-            <form onSubmit={onSubmit}>
               <h1>Create a new pokemon</h1>
-              <div></div>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Name"
-                  name="name"
-                  onChange={onInputChange}
-                  value={pokemon.name}
-                  className={errors.name}
-                ></input>
-                {errors.name && <p>{errors.name}</p>}
-              </div>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Image"
-                  name="image"
-                  onChange={onInputChange}
-                  value={pokemon.image}
-                ></input>
-                {errors.image && <p>{errors.image}</p>}
-              </div>
-              <div>
-                <select
-                  name="type1"
-                  onChange={onInputChange}
-                  value={pokemon.type1}
-                >
-                  <option value="Type 1">Type 1</option>
-                  {types &&
-                    types
-                      .sort((a, b) => {
-                        if (a.name < b.name) return -1;
-                        if (a.name > b.name) return 1;
-                        return 0;
-                      })
-                      .map((type) => {
-                        return (
-                          <option value={type.name} key={type.id}>
-                            {type.name}
-                          </option>
-                        );
-                      })}
-                </select>
-                <select
-                  name="type2"
-                  onChange={onInputChange}
-                  value={pokemon.type2}
-                >
-                  <option value="Type 2">Type 2</option>
-                  {types &&
-                    types
-                      .sort((a, b) => {
-                        if (a.name < b.name) return -1;
-                        if (a.name > b.name) return 1;
-                        return 0;
-                      })
-                      .map((type) => {
-                        return (
-                          <option value={type.name} key={type.id}>
-                            {type.name}
-                          </option>
-                        );
-                      })}
-                </select>
-                {errors.type1 && <p>{errors.type1}</p>}
-              </div>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Height"
-                  name="height"
-                  onChange={onInputChange}
-                  value={pokemon.height}
-                  className={errors.height}
-                ></input>
-                {errors.height && <p>{errors.height}</p>}
-              </div>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Weight"
-                  name="weight"
-                  onChange={onInputChange}
-                  value={pokemon.weight}
-                  className={errors.weight}
-                ></input>
-                {errors.weight && <p>{errors.weight}</p>}
-              </div>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Health"
-                  name="hp"
-                  onChange={onInputChange}
-                  value={pokemon.hp}
-                  className={errors.hp}
-                ></input>
-                {errors.hp && <p>{errors.hp}</p>}
-              </div>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Attack"
-                  name="attack"
-                  onChange={onInputChange}
-                  value={pokemon.attack}
-                  className={errors.attack}
-                ></input>
-                {errors.attack && <p>{errors.attack}</p>}
-              </div>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Defense"
-                  name="defense"
-                  onChange={onInputChange}
-                  value={pokemon.defense}
-                  className={errors.defense}
-                ></input>
-                {errors.defense && <p>{errors.defense}</p>}
-              </div>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Speed"
-                  name="speed"
-                  onChange={onInputChange}
-                  value={pokemon.speed}
-                  className={errors.speed}
-                ></input>
-                {errors.speed && <p>{errors.speed}</p>}
-              </div>
-            </form>
+            </div>
           </div>
-        </div>
+          <div className={styles.content}>
+            <div>
+              <div>
+                {pokemon.image ? (
+                  <img src={pokemon.image} alt={pokemon.name}></img>
+                ) : (
+                  <img src="../newPokemonImg.png" alt="New Pokemon"></img>
+                )}
+              </div>
+            </div>
+            <div>
+              <form className={styles.form_content} onSubmit={onSubmit}>
+                <div className={styles.name}>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      name="name"
+                      onChange={onInputChange}
+                      value={pokemon.name}
+                      className={errors.name && styles.danger}
+                    ></input>
+                  </div>
+                  <div>
+                    {errors.name && (
+                      <p className={styles.errors}>{errors.name}</p>
+                    )}
+                  </div>
+                </div>
+                <div className={styles.image}>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Image"
+                      name="image"
+                      className={styles.danger}
+                      onChange={onInputChange}
+                      value={pokemon.image}
+                    ></input>
+                  </div>
+                  <div>
+                    {errors.image && (
+                      <p className={styles.errors}>{errors.image}</p>
+                    )}
+                  </div>
+                </div>
+                <div className={styles.types}>
+                  <div>
+                    <select
+                      name="type1"
+                      onChange={onInputChange}
+                      value={pokemon.type1}
+                    >
+                      <option value="Type 1">Type 1</option>
+                      {types &&
+                        types
+                          .sort((a, b) => {
+                            if (a.name < b.name) return -1;
+                            if (a.name > b.name) return 1;
+                            return 0;
+                          })
+                          .map((type) => {
+                            return (
+                              <option value={type.name} key={type.id}>
+                                {type.name}
+                              </option>
+                            );
+                          })}
+                    </select>
+                    <select
+                      name="type2"
+                      onChange={onInputChange}
+                      value={pokemon.type2}
+                    >
+                      <option value="Type 2">Type 2</option>
+                      {types &&
+                        types
+                          .sort((a, b) => {
+                            if (a.name < b.name) return -1;
+                            if (a.name > b.name) return 1;
+                            return 0;
+                          })
+                          .map((type) => {
+                            return (
+                              <option value={type.name} key={type.id}>
+                                {type.name}
+                              </option>
+                            );
+                          })}
+                    </select>
+                  </div>
+                  <div>
+                    {errors.type1 && (
+                      <p className={styles.errors}>{errors.type1}</p>
+                    )}
+                  </div>
+                </div>
+                <div className={styles.height}>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Height"
+                      name="height"
+                      onChange={onInputChange}
+                      value={pokemon.height}
+                      className={errors.height && styles.danger}
+                    ></input>
+                  </div>
+                  <div>
+                    {errors.height && (
+                      <p className={styles.errors}>{errors.height}</p>
+                    )}
+                  </div>
+                </div>
+                <div className={styles.weight}>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Weight"
+                      name="weight"
+                      onChange={onInputChange}
+                      value={pokemon.weight}
+                      className={errors.weight && styles.danger}
+                    ></input>
+                  </div>
+                  <div>
+                    {errors.weight && (
+                      <p className={styles.errors}>{errors.weight}</p>
+                    )}
+                  </div>
+                </div>
+                <div className={styles.health}>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Health"
+                      name="hp"
+                      onChange={onInputChange}
+                      value={pokemon.hp}
+                      className={errors.hp && styles.danger}
+                    ></input>
+                  </div>
+                  <div>
+                    {errors.hp && <p className={styles.errors}>{errors.hp}</p>}
+                  </div>
+                </div>
+                <div className={styles.attack}>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Attack"
+                      name="attack"
+                      onChange={onInputChange}
+                      value={pokemon.attack}
+                      className={errors.attack && styles.danger}
+                    ></input>
+                  </div>
+                  <div>
+                    {errors.attack && (
+                      <p className={styles.errors}>{errors.attack}</p>
+                    )}
+                  </div>
+                </div>
+                <div className={styles.defense}>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Defense"
+                      name="defense"
+                      onChange={onInputChange}
+                      value={pokemon.defense}
+                      className={errors.defense && styles.danger}
+                    ></input>
+                  </div>
+                  <div>
+                    {errors.defense && (
+                      <p className={styles.errors}>{errors.defense}</p>
+                    )}
+                  </div>
+                </div>
+                <div className={styles.speed}>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Speed"
+                      name="speed"
+                      onChange={onInputChange}
+                      value={pokemon.speed}
+                      className={errors.speed && styles.danger}
+                    ></input>
+                  </div>
+                  <div>
+                    {errors.speed && (
+                      <p className={styles.errors}>{errors.speed}</p>
+                    )}
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div className={styles.content_btns}>
+            {Object.keys(errors).length !== 0 ? (
+              <div className={styles.btn_after}>
+                <Link to="/home">
+                  <button type="submit" className={styles.goback}>
+                    Go Back
+                  </button>
+                </Link>
+                <button
+                  disabled="true"
+                  className={styles.btnError}
+                  onClick={finishedForm}
+                >
+                  <p>Complete the form</p>
+                </button>
+              </div>
+            ) : (
+              <div className={styles.btn_before}>
+                <Link to="/home">
+                  <button type="submit" className={styles.goback}>
+                    Go Back
+                  </button>
+                </Link>
+                <button
+                  type="submit"
+                  className={styles.btn}
+                  onClick={finishedForm}
+                >
+                  Create
+                </button>
+              </div>
+            )}
+          </div>
+        </form>
       </div>
-      {Object.keys(errors).length !== 0 ? (
-        <div>
-          <Link to="/home">
-            <button type="submit" className="atras">
-              Atrás
-            </button>
-          </Link>
-          <button disabled="true" onClick={finishedForm}>
-            <p>Complete the form</p>
-          </button>
-        </div>
-      ) : (
-        <div>
-          <Link to="/home">
-            <button type="submit" className="atras">
-              Atrás
-            </button>
-          </Link>
-          <button type="submit" onClick={finishedForm}>
-            Create
-          </button>
-        </div>
-      )}
-    </form>
+    </div>
   );
 }
 

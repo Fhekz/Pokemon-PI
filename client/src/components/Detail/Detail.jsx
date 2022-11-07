@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemonById, clearPokemonById } from "../../actions";
-import NavBar from "../NavBar/NavBar.jsx";
 import styles from "./Detail.module.css";
 
 export default function Detail() {
@@ -39,9 +38,6 @@ export default function Detail() {
   if (pokemonByID.length === 0) {
     return (
       <>
-        <div>
-          <NavBar />
-        </div>
         <div className={styles.loading}>
           <img src="../pokeball.gif" alt="loading" />
           <h1>Loading... please wait</h1>
@@ -51,9 +47,6 @@ export default function Detail() {
   } else {
     return (
       <>
-        <div>
-          <NavBar />
-        </div>
         <div className={styles.main}>
           <div className={styles.card}>
             <div className={styles.top}>
