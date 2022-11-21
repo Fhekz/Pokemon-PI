@@ -8,11 +8,11 @@ import styles from "./Cards.module.css";
 
 export default function Cards() {
   const dispatch = useDispatch();
+  const allPokemons = useSelector((state) => state.filteredPokemons);
   const [currentPage, setCurrentPage] = useState(1);
   const [pokemonsPerPage] = useState(12);
   const indexOfLastPokemon = currentPage * pokemonsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
-  const allPokemons = useSelector((state) => state.filteredPokemons);
   const currentPokemons = allPokemons.slice(
     indexOfFirstPokemon,
     indexOfLastPokemon

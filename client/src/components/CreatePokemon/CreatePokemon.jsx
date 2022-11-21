@@ -86,7 +86,7 @@ export default function CreatePokemon() {
               </div>
             </div>
             <div>
-              <form className={styles.form_content} onSubmit={onSubmit}>
+              <div className={styles.form_content} onSubmit={onSubmit}>
                 <div className={styles.name}>
                   <div>
                     <input
@@ -272,7 +272,7 @@ export default function CreatePokemon() {
                     )}
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
           <div className={styles.content_btns}>
@@ -284,7 +284,7 @@ export default function CreatePokemon() {
                   </button>
                 </Link>
                 <button
-                  disabled="true"
+                  disabled
                   className={styles.btnError}
                   onClick={finishedForm}
                 >
@@ -349,28 +349,28 @@ export function validateForm(pokemon) {
   } else if (
     !/^([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])$/.test(pokemon.hp)
   ) {
-    errors.hp = "Hp must be between 1 and 255";
+    errors.hp = "Hp must be between 0 and 255";
   }
   if (!pokemon.attack) {
     errors.attack = "Attack is required";
   } else if (
     !/^([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])$/.test(pokemon.attack)
   ) {
-    errors.attack = "Attack must be between 1 and 255";
+    errors.attack = "Attack must be between 0 and 255";
   }
   if (!pokemon.defense) {
     errors.defense = "Defense is required";
   } else if (
     !/^([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])$/.test(pokemon.defense)
   ) {
-    errors.defense = "Defense must be between 1 and 255";
+    errors.defense = "Defense must be between 0 and 255";
   }
   if (!pokemon.speed) {
     errors.speed = "Speed is required";
   } else if (
     !/^([0-9]{1,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])$/.test(pokemon.speed)
   ) {
-    errors.speed = "Speed must be between 1 and 255";
+    errors.speed = "Speed must be between 0 and 255";
   }
 
   return errors;

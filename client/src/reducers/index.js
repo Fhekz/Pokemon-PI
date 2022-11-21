@@ -15,7 +15,7 @@ const rootReducer = (state = initialState, action) => {
       };
     case "GET_POKEMON_BY_NAME":
       const searchPokemon = state.allPokemons.filter((p) => {
-        return p.name.toLowerCase().includes(action.payload.toLowerCase());
+        return p.attack.includes(action.payload);
       });
       if (searchPokemon) {
         return {
@@ -86,7 +86,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         filteredPokemons: state.allPokemons,
-        addedPokemon: false,
       };
     case "GET_POKEMON_BY_ID":
       return {
